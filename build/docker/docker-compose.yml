@@ -1,0 +1,36 @@
+version: '3'
+services:
+  php: &php
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment: &env
+      TZ: '${TZ:-Europe/Berlin}'
+      GOSU_UID: "${GOSU_UID:-1000}"
+      GOSU_GID: "${GOSU_GID:-1000}"
+      GOSU_ENABLED: "${GOSU_ENABLED:-1}"
+      TARGET_MODE: "php"
+    volumes:
+      - '${PWD}:/var/www/html'
+    working_dir: /var/www/html
+  shell:
+    <<: *php
+    command: ["/bin/bash"]
+  root-shell:
+    <<: *php
+    environment:
+      <<: *env
+      GOSU_ENABLED: "${GOSU_ENABLED:-0}"
+    command: ["/bin/bash"]
+  phpcs:
+    <<: *php
+    environment: &envphpcs
+      <<: *env
+      TARGET_MODE: "phpcs"
+    command: ["phpcs"]
+  phpcbf:
+    <<: *php
+    environment:
+      <<: *envphpcs
+      TARGET_MODE: "phpcbf"
+    command: ["phpcbf"]

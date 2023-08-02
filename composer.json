@@ -1,0 +1,40 @@
+{
+    "name": "pj/command-faker",
+    "description": "A faker for commands running in console to avoid error exists for commands used in composer.json which do not exist in production",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pj\\CommandFaker\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pj\\CommandFaker\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Deborah White",
+            "email": "deborah.white1503@icloud.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Pj\\CommandFaker\\CommandFakerServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^8.5",
+        "nunomaduro/collision": "^7.4"
+    }
+}
