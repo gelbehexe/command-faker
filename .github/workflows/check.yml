@@ -1,0 +1,28 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  composer-tests:
+    strategy:
+      matrix:
+        version: [ '8.1', '8.2']
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+        with:
+          php-version: ${{ matrix.version }}
+      - uses: actions/checkout@v3
+      - name: Validate composer.json
+        run: composer validate --strict --no-check-lock
+        
+      - name: Install Dependencies
+        run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+      - name: Execute tests
+        run: composer run-script test
