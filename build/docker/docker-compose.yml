@@ -10,9 +10,20 @@ services:
       GOSU_GID: "${GOSU_GID:-1000}"
       GOSU_ENABLED: "${GOSU_ENABLED:-1}"
       TARGET_MODE: "php"
+      PHP_IDE_CONFIG: "${PHP_IDE_CONFIG:-serverName=docker-server}"
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
     volumes:
       - '${PWD}:/var/www/html'
     working_dir: /var/www/html
+    networks:
+      - projects
+  phpunit:
+    <<: *php
+    environment:
+      <<: *env
+      TARGET_MODE: "phpunit"
+#    command: ["vendor/bin/phpunit"]
   shell:
     <<: *php
     command: ["/bin/bash"]
@@ -34,3 +45,6 @@ services:
       <<: *envphpcs
       TARGET_MODE: "phpcbf"
     command: ["phpcbf"]
+networks:
+  projects:
+    driver: bridge

@@ -34,6 +34,7 @@ chown -R "${GOSU_GID}:${GOSU_UID}" /.composer
 # run scripts:
 for script in /usr/local/docker/scripts.d/*.sh; do
   test -e "$script" || continue
+  # shellcheck disable=SC1090
   . "$script"
 done
 
@@ -50,6 +51,8 @@ elif [ "${1#-}" != "$1" ]; then
 fi
 
 if [ "$GOSU_ENABLED" = "1" ]; then
+#  echo "Command is '$1'" > /var/www/html/.gosu_exec.log
+#  echo gosu "${GOSU_UID}:${GOSU_GID}" "$@" >> /var/www/html/.gosu_exec.log
   exec gosu "${GOSU_UID}:${GOSU_GID}" "$@"
 else
   exec "$@"

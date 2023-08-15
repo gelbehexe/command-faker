@@ -1,4 +1,4 @@
-/.phpunit.cache
+/.phpunit.*
 /vendor
 composer.phar
 composer.lock
@@ -8,7 +8,7 @@ Thumbs.db
 /.fleet
 /.vscode
 .phpunit.result.cache
-.phpcs.report.log
-.build.log
+.*.log
 /archive/*
+!/archive/.gitignore
 /tmp
