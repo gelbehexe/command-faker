@@ -13,7 +13,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Pj\\CommandFaker\\": "tests/"
+            "Pj\\CommandFaker\\Tests\\": "tests/"
         }
     },
     "authors": [
