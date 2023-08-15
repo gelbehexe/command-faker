@@ -34,7 +34,7 @@ is_valid_command() {
 is_php_command() {
 #  is_service "$1" && return 0
   case $1 in
-  php|phpunit|test)
+  php|phpunit|test|pint)
     return 0;
     ;;
   esac
@@ -73,6 +73,7 @@ showHelp() {
   err -e "\t\trebuild: Build docker images without cache"
   err -e "\t\tcomposer: Run composer"
   err -e "\t\tarchive: Build a dist archive in zip format (based on composer archive command)"
+  err -e "\t\tpint: test or fix php errors"
   err -e "\t\t<service>: One of the following: $(getServices)"
   err -e "\t\talias: set up aliases in current shell (composer and services)"
   err -e "\t\tunalias: remove aliases in current shell (composer and services)"
@@ -282,9 +283,15 @@ elif is_php_command "$1"; then
     shift
     args+=("${@}")
   else
+    # test/phpunit - pint
+    if [ "$1" == "pint" ]; then
+      vendor_bin="vendor/bin/pint"
+    else
+      vendor_bin="vendor/bin/phpunit"
+    fi
+
     shift
-    # test/phpunit
-    args+=("-f" "vendor/bin/phpunit")
+    args+=("-f" "${vendor_bin}")
 
     if [ "$#" -gt 0 ]; then
       args+=("--" "${@}")

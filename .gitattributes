@@ -23,6 +23,7 @@ Thumbs.db export-ignore
 /.fleet export-ignore
 /.vscode export-ignore
 /tmp export-ignore
+/pint.json export-ignore
 .phpunit.result.cache export-ignore
 .*.log export-ignore
 .editorconfig export-ignore

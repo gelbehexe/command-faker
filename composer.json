@@ -35,6 +35,25 @@
     "require-dev": {
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^8.5",
-        "nunomaduro/collision": "^7.4"
+        "nunomaduro/collision": "^7.4",
+        "laravel/pint": "^1.11"
+    },
+    "scripts": {
+        "pint-test": [
+            "pint --test"
+        ],
+        "pint-precommit": [
+            "pint --test --dirty --verbose"
+        ],
+        "pint-fix": [
+            "pint --test"
+        ],
+        "phpunit": [
+            "phpunit --stderr --no-progress --colors=never"
+        ],
+        "test": [
+            "@pint-precommit",
+            "@phpunit"
+        ]
     }
 }
