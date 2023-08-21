@@ -3,6 +3,11 @@
     "description": "A faker for commands running in console to avoid error exists for commands used in composer.json which do not exist in production",
     "type": "library",
     "license": "MIT",
+    "homepage": "https://github.com/gelbehexe/command-faker",
+    "support": {
+        "issues": "https://github.com/gelbehexe/command-faker/issues",
+        "source": "https://github.com/gelbehexe/command-fakere"
+    },
     "autoload": {
         "psr-4": {
             "Pj\\CommandFaker\\": "src/"
