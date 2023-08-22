@@ -33,7 +33,7 @@ class FakeCommandRepository
             return true;
         }
 
-        if (!str_contains($registeredCommand, '*')) {
+        if (! str_contains($registeredCommand, '*')) {
             return false;
         }
 
@@ -42,11 +42,11 @@ class FakeCommandRepository
         $parts = explode('*', $clean_wildcard);
 
         $part = array_shift($parts);
-        if (!str_starts_with(haystack: $command, needle: $part)) {
+        if (! str_starts_with(haystack: $command, needle: $part)) {
             return false;
         }
 
-        if (!count($parts)) {
+        if (! count($parts)) {
             return true;
         }
 
@@ -54,15 +54,15 @@ class FakeCommandRepository
 
         $part = array_pop($parts);
 
-        if (!str_ends_with(haystack: $command, needle: $part)) {
+        if (! str_ends_with(haystack: $command, needle: $part)) {
             return false;
         }
 
-        if (!count($parts)) {
+        if (! count($parts)) {
             return true;
         }
 
-        $command = substr($command, 0, strlen($command)-strlen($part));
+        $command = substr($command, 0, strlen($command) - strlen($part));
 
         foreach ($parts as $part) {
             if (($pos = strpos($command, $part)) === false) {

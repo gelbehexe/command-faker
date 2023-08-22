@@ -6,7 +6,6 @@ use Orchestra\Testbench\TestCase;
 
 class ExampleTest extends TestCase
 {
-
     /**
      * @coversNothing
      */

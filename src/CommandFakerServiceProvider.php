@@ -15,13 +15,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class CommandFakerServiceProvider extends ServiceProvider
 {
-
     /** @noinspection PhpUnusedParameterInspection */
     public function register(): void
     {
         $this->app->singleton(FakeCommandRepository::class);
 
-        if (!$this->app->runningInConsole() || $this->app->runningUnitTests()) {
+        if (! $this->app->runningInConsole() || $this->app->runningUnitTests()) {
             return;
         }
 
@@ -32,7 +31,7 @@ class CommandFakerServiceProvider extends ServiceProvider
                 /** @var null|EventDispatcherInterface $symfonyDispatcher */
                 $symfonyDispatcher = $reflection->getProperty('symfonyDispatcher')->getValue($kernel);
                 $symfonyDispatcher?->addListener(ConsoleEvents::ERROR, function (ConsoleErrorEvent $event) {
-                    if (!($event->getError() instanceof CommandNotFoundException)) {
+                    if (! ($event->getError() instanceof CommandNotFoundException)) {
                         return;
                     }
                     $command = $event->getInput()->getFirstArgument();
