@@ -51,7 +51,7 @@
             "pint --test --dirty --verbose"
         ],
         "pint-fix": [
-            "pint --test"
+            "pint"
         ],
         "phpunit": [
             "phpunit --stderr --no-progress --colors=never"
