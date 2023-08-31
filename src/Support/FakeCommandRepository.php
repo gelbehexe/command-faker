@@ -49,10 +49,6 @@ class FakeCommandRepository
             return false;
         }
 
-        if (! count($parts)) {
-            return true;
-        }
-
         $command = substr($command, strlen($part));
 
         $part = array_pop($parts);
