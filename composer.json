@@ -18,7 +18,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Pj\\CommandFaker\\Tests\\": "tests/"
+            "Pj\\CommandFaker\\Tests\\": "tests/",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "authors": [
@@ -39,9 +42,11 @@
     },
     "require-dev": {
         "mockery/mockery": "^1.6",
-        "orchestra/testbench": "^8.5",
         "nunomaduro/collision": "^7.4",
-        "laravel/pint": "^1.11"
+        "laravel/pint": "^1.11",
+        "orchestra/testbench": "^8.9",
+        "orchestra/testbench-dusk": "^8.9",
+        "orchestra/canvas": "^8.4"
     },
     "scripts": {
         "pint-test": [
@@ -59,6 +64,23 @@
         "test": [
             "@pint-precommit",
             "@phpunit"
+        ],
+        "dusk:install-chromedriver": "@php vendor/bin/dusk-updater detect --auto-update --ansi",
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare",
+            "@dusk:install-chromedriver"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@prepare",
+            "@php vendor/bin/pint"
         ]
     }
 }

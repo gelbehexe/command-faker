@@ -1,0 +1,5 @@
+workbench:
+  start: '/'
+  install: false
+providers:
+  - Pj\CommandFaker\CommandFakerServiceProvider
