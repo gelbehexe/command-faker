@@ -28,6 +28,9 @@
         <include>
             <directory>src</directory>
         </include>
+        <exclude>
+            <directory suffix="ServiceProvider.php">./src</directory>
+        </exclude>
     </source>
     <php>
         <ini name="opcache.enable_cli" value="off" />
