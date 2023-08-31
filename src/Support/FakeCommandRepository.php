@@ -50,6 +50,7 @@ class FakeCommandRepository
             return false;
         }
 
+        // replace duplicate '*'
         $clean_wildcard = preg_replace('/\*{2,}/', '*', $registeredCommand);
 
         $parts = explode('*', $clean_wildcard);
