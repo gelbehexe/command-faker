@@ -29,6 +29,9 @@ class FakeCommandRepository
 
     protected function isCommandMatching(string $command, string $registeredCommand): bool
     {
+        if (blank($command)) {
+            return false;
+        }
         if ($command === $registeredCommand) {
             return true;
         }
