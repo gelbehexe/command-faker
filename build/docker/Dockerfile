@@ -11,7 +11,7 @@ RUN apt-get update && \
     apt-get install -y zlib1g-dev libpng-dev libjpeg-dev libfreetype-dev libssl-dev libpq-dev libcurl4-openssl-dev  \
         libmemcached-dev libldap-dev \
         libc-client-dev libkrb5-dev libxml2-dev libzip-dev libbz2-dev libffi-dev libxslt1-dev libmagickwand-dev \
-        gosu libcap2-bin acl git && \
+        gosu libcap2-bin acl git unzip && \
     docker-php-source extract && \
     pecl install msgpack && pecl install xdebug && pecl install igbinary && pecl install pcov && \
     docker-php-ext-install sockets && \
