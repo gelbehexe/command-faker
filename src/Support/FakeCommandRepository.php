@@ -18,13 +18,23 @@ class FakeCommandRepository
 
     public function matches(string $command): bool
     {
-        foreach ($this->faked_commands as $faked_command) {
+        foreach ($this->getFakedCommands() as $faked_command) {
             if ($this->isCommandMatching($command, $faked_command)) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    public function getFakedCommands(): array
+    {
+        return $this->faked_commands;
+    }
+
+    public function hasFakedCommands(): bool
+    {
+        return count($this->getFakedCommands()) > 0;
     }
 
     protected function isCommandMatching(string $command, string $registeredCommand): bool
